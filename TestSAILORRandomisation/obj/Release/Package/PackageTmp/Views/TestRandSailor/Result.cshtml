@@ -1,0 +1,81 @@
+﻿@model TestSAILORRandomisation.Models.SAILORTest
+@{
+    ViewBag.Title = "TEST SAILOR Randomisation" 
+    @*+"Result"*@
+                ;
+}
+
+<img src="~/Content/images/SAILORLogo.png" alt="logo" />
+
+
+
+
+<h2>Randomisation Allocation: @Html.DisplayFor(model => model.RandAllocation)</h2>
+<fieldset>
+
+      <legend></legend>
+       @* @Html.HiddenFor(model => model.ID)*@
+
+    <h2>
+     <div class="editor-label">
+            @Html.LabelFor(model => model.ScreeningID, "Screening ID: ")
+            @Html.DisplayFor(model => model.ScreeningID)
+        </div>
+
+               </h2>
+
+
+    <h2>
+     <div class="editor-label">
+            @Html.LabelFor(model => model.RandID, "Randomisation ID assigned: ")
+            @Html.DisplayFor(model => model.RandID)
+        </div>
+
+        </h2>
+
+
+@*
+    
+    <h2>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Site, "Site: ")
+            @Html.DisplayFor(model => model.Site)
+        </div>
+              </h2>
+    *@
+
+    <h2>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ParticipantInitials, "Participant Initials: ")
+            @Html.DisplayFor(model => model.ParticipantInitials)
+        </div>
+        
+
+        </h2>
+
+   
+    <h2>
+     @Html.Raw("Randomisation Date and Time: ")@DateTime.Now
+    </h2>
+    
+
+
+</fieldset>
+</br>
+
+
+@*
+ <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Send" />
+        </div>
+    </div>*@
+
+ <td>
+                      @Html.ActionLink("Exit", "Index", new {type = "button"})
+     
+
+     </td>
+</br>
+

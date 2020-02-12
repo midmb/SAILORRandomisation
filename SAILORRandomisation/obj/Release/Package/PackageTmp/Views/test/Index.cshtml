@@ -1,0 +1,141 @@
+﻿@model IEnumerable<SAILORRandomisation.Models.SAILOR>
+
+
+
+ 
+      
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+
+
+ @if (@User.Identity.Name == "thornek")
+
+      { 
+
+     
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RandID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SiteID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScreeningID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ParticipantInitials)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SITE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RandomisedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Incl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Excl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApproveMedical)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConsentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RandDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RandTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RandAllocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RandMethod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RandError)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RandErrorDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RandID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SiteID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScreeningID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipantInitials)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SITE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RandomisedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Incl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Excl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApproveMedical)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConsentDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RandDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RandTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RandAllocation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RandMethod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RandError)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RandErrorDate)
+        </td>
+       
+    </tr>
+}
+
+</table>
+  }

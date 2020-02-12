@@ -1,0 +1,141 @@
+﻿@model SAILORRandomisation.Models.SAILOR
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>SAILOR</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RandID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RandID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SiteID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SiteID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ScreeningID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ScreeningID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ParticipantInitials)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ParticipantInitials)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Age)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Age)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Gender)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Gender)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SITE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SITE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RandomisedBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RandomisedBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Incl)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Incl)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Excl)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Excl)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ApproveMedical)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ApproveMedical)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ConsentDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ConsentDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RandDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RandDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RandTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RandTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RandAllocation)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RandAllocation)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RandMethod)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RandMethod)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RandError)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RandError)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RandErrorDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RandErrorDate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

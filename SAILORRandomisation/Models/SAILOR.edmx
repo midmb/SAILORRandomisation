@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WWORTHcmsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="WWORTHcmsModelStoreContainer">
+          <EntitySet Name="Memberships" EntityType="WWORTHcmsModel.Store.Memberships" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SAILOR" EntityType="WWORTHcmsModel.Store.SAILOR" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="WWORTHcmsModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_dbo_Memberships_dbo_Users_UserId" Association="WWORTHcmsModel.Store.FK_dbo_Memberships_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Memberships">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordFormat" Type="int" Nullable="false" />
+          <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordQuestion" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordAnswer" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+          <Property Name="LastPasswordChangedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLockoutDate" Type="datetime" Nullable="false" />
+          <Property Name="FailedPasswordAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="datetime" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptWindowsStart" Type="datetime" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="SAILOR">
+          <Key>
+            <PropertyRef Name="RandID" />
+          </Key>
+          <Property Name="RandID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SiteID" Type="nvarchar(max)" />
+          <Property Name="ScreeningID" Type="int" />
+          <Property Name="ParticipantInitials" Type="nvarchar(max)" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Gender" Type="int" />
+          <Property Name="SITE" Type="nvarchar(max)" />
+          <Property Name="RandomisedBy" Type="nvarchar(max)" />
+          <Property Name="Incl" Type="int" />
+          <Property Name="Excl" Type="int" />
+          <Property Name="ApproveMedical" Type="int" />
+          <Property Name="ConsentDate" Type="date" />
+          <Property Name="RandDate" Type="datetime" />
+          <Property Name="RandTime" Type="datetime" />
+          <Property Name="RandAllocation" Type="nvarchar(max)" />
+          <Property Name="RandMethod" Type="int" />
+          <Property Name="RandError" Type="int" />
+          <Property Name="RandErrorDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+          <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Memberships_dbo_Users_UserId">
+          <End Role="Users" Type="WWORTHcmsModel.Store.Users" Multiplicity="1" />
+          <End Role="Memberships" Type="WWORTHcmsModel.Store.Memberships" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WWORTHcmsModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="WWORTHcmsEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Memberships" EntityType="WWORTHcmsModel.Membership" />
+          <EntitySet Name="Users" EntityType="WWORTHcmsModel.User" />
+          <AssociationSet Name="FK_dbo_Memberships_dbo_Users_UserId" Association="WWORTHcmsModel.FK_dbo_Memberships_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <EntitySet Name="SAILORs" EntityType="WWORTHcmsModel.SAILOR" />
+        </EntityContainer>
+        <EntityType Name="Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordFormat" Type="Int32" Nullable="false" />
+          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordQuestion" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordAnswer" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="IsLockedOut" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLoginDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastPasswordChangedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLockoutDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FailedPasswordAttemptCount" Type="Int32" Nullable="false" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="Int32" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptWindowsStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comment" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="User" Relationship="WWORTHcmsModel.FK_dbo_Memberships_dbo_Users_UserId" FromRole="Memberships" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="LastActivityDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Membership" Relationship="WWORTHcmsModel.FK_dbo_Memberships_dbo_Users_UserId" FromRole="Users" ToRole="Memberships" />
+        </EntityType>
+        <Association Name="FK_dbo_Memberships_dbo_Users_UserId">
+          <End Role="Users" Type="WWORTHcmsModel.User" Multiplicity="1" />
+          <End Role="Memberships" Type="WWORTHcmsModel.Membership" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SAILOR">
+          <Key>
+            <PropertyRef Name="RandID" />
+          </Key>
+          <Property Type="Int32" Name="RandID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="SiteID" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ScreeningID" />
+          <Property Type="String" Name="ParticipantInitials" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Age" />
+          <Property Type="Int32" Name="Gender" />
+          <Property Type="String" Name="SITE" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RandomisedBy" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Incl" />
+          <Property Type="Int32" Name="Excl" />
+          <Property Type="Int32" Name="ApproveMedical" />
+          <Property Type="DateTime" Name="ConsentDate" Precision="0" />
+          <Property Type="DateTime" Name="RandDate" Precision="3" />
+          <Property Type="DateTime" Name="RandTime" Precision="3" />
+          <Property Type="String" Name="RandAllocation" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="RandMethod" />
+          <Property Type="Int32" Name="RandError" />
+          <Property Type="DateTime" Name="RandErrorDate" Precision="0" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WWORTHcmsModelStoreContainer" CdmEntityContainer="WWORTHcmsEntities">
+          <EntitySetMapping Name="Memberships">
+            <EntityTypeMapping TypeName="WWORTHcmsModel.Membership">
+              <MappingFragment StoreEntitySet="Memberships">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+                <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+                <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+                <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+                <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptWindowsStart" ColumnName="FailedPasswordAnswerAttemptWindowsStart" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="WWORTHcmsModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+                <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SAILORs">
+            <EntityTypeMapping TypeName="WWORTHcmsModel.SAILOR">
+              <MappingFragment StoreEntitySet="SAILOR">
+                <ScalarProperty Name="RandErrorDate" ColumnName="RandErrorDate" />
+                <ScalarProperty Name="RandError" ColumnName="RandError" />
+                <ScalarProperty Name="RandMethod" ColumnName="RandMethod" />
+                <ScalarProperty Name="RandAllocation" ColumnName="RandAllocation" />
+                <ScalarProperty Name="RandTime" ColumnName="RandTime" />
+                <ScalarProperty Name="RandDate" ColumnName="RandDate" />
+                <ScalarProperty Name="ConsentDate" ColumnName="ConsentDate" />
+                <ScalarProperty Name="ApproveMedical" ColumnName="ApproveMedical" />
+                <ScalarProperty Name="Excl" ColumnName="Excl" />
+                <ScalarProperty Name="Incl" ColumnName="Incl" />
+                <ScalarProperty Name="RandomisedBy" ColumnName="RandomisedBy" />
+                <ScalarProperty Name="SITE" ColumnName="SITE" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="ParticipantInitials" ColumnName="ParticipantInitials" />
+                <ScalarProperty Name="ScreeningID" ColumnName="ScreeningID" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="RandID" ColumnName="RandID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

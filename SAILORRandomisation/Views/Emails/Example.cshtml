@@ -1,0 +1,31 @@
+﻿@model SAILORRandomisation.Models.SAILOR
+
+
+From: mihaelabarbu@chi.swan.ac.uk   
+To:m.barbu@swansea.ac.uk
+Subject: Fancy email
+Views: Text, Html
+@*@Models.Message @ViewBag.Data*@
+
+
+@*@Models.SmartEmailVM.RandAllocation
+@Models.SmartEmailVM.RandAllocation.RandID*@
+
+
+
+ @Html.DisplayFor(model => model.RandID)
+
+
+@*var template = File.ReadAllText(HttpContext.Current.Server.MapPath(“~/Views/randsailor/Example.html”)); 
+var viewModel = new SmartEmailVM
+{
+model.RandAllocation
+model.RandID
+
+}
+var body = Razor.Parse(template, viewModel); 
+EmailSender.Send(fromEmailAddress, toEmailAddress, subject, body);*@
+
+
+    
+Thanks

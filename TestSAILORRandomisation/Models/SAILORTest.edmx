@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SAILORModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="SAILORModelStoreContainer">
+          <EntitySet Name="Applications" EntityType="SAILORModel.Store.Applications" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Memberships" EntityType="SAILORModel.Store.Memberships" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SAILORTest" EntityType="SAILORModel.Store.SAILORTest" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="SAILORModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_dbo_Memberships_dbo_Applications_ApplicationId" Association="SAILORModel.Store.FK_dbo_Memberships_dbo_Applications_ApplicationId">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Memberships_dbo_Users_UserId" Association="SAILORModel.Store.FK_dbo_Memberships_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Users_dbo_Applications_ApplicationId" Association="SAILORModel.Store.FK_dbo_Users_dbo_Applications_ApplicationId">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Applications">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ApplicationName" Type="nvarchar" Nullable="false" MaxLength="235" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Memberships">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordFormat" Type="int" Nullable="false" />
+          <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordQuestion" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordAnswer" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+          <Property Name="LastPasswordChangedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLockoutDate" Type="datetime" Nullable="false" />
+          <Property Name="FailedPasswordAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="datetime" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptWindowsStart" Type="datetime" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="SAILORTest">
+          <Key>
+            <PropertyRef Name="RandID" />
+          </Key>
+          <Property Name="RandID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SiteID" Type="nvarchar(max)" />
+          <Property Name="ScreeningID" Type="int" />
+          <Property Name="ParticipantInitials" Type="nvarchar(max)" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Gender" Type="int" />
+          <Property Name="SITE" Type="nvarchar(max)" />
+          <Property Name="RandomisedBy" Type="nvarchar(max)" />
+          <Property Name="Incl" Type="int" />
+          <Property Name="Excl" Type="int" />
+          <Property Name="ApproveMedical" Type="int" />
+          <Property Name="ConsentDate" Type="date" />
+          <Property Name="RandDate" Type="datetime" />
+          <Property Name="RandTime" Type="datetime" />
+          <Property Name="RandAllocation" Type="nvarchar(max)" />
+          <Property Name="RandMethod" Type="int" />
+          <Property Name="RandError" Type="int" />
+          <Property Name="RandErrorDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+          <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Memberships_dbo_Applications_ApplicationId">
+          <End Role="Applications" Type="SAILORModel.Store.Applications" Multiplicity="1" />
+          <End Role="Memberships" Type="SAILORModel.Store.Memberships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Memberships_dbo_Users_UserId">
+          <End Role="Users" Type="SAILORModel.Store.Users" Multiplicity="1" />
+          <End Role="Memberships" Type="SAILORModel.Store.Memberships" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Users_dbo_Applications_ApplicationId">
+          <End Role="Applications" Type="SAILORModel.Store.Applications" Multiplicity="1" />
+          <End Role="Users" Type="SAILORModel.Store.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SAILORModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SAILOREntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Applications" EntityType="SAILORModel.Application" />
+          <EntitySet Name="Memberships" EntityType="SAILORModel.Membership" />
+          <EntitySet Name="SAILORTests" EntityType="SAILORModel.SAILORTest" />
+          <EntitySet Name="Users" EntityType="SAILORModel.User" />
+          <AssociationSet Name="FK_dbo_Memberships_dbo_Applications_ApplicationId" Association="SAILORModel.FK_dbo_Memberships_dbo_Applications_ApplicationId">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Users_dbo_Applications_ApplicationId" Association="SAILORModel.FK_dbo_Users_dbo_Applications_ApplicationId">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Memberships_dbo_Users_UserId" Association="SAILORModel.FK_dbo_Memberships_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="ApplicationName" Type="String" Nullable="false" MaxLength="235" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Memberships" Relationship="SAILORModel.FK_dbo_Memberships_dbo_Applications_ApplicationId" FromRole="Applications" ToRole="Memberships" />
+          <NavigationProperty Name="Users" Relationship="SAILORModel.FK_dbo_Users_dbo_Applications_ApplicationId" FromRole="Applications" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordFormat" Type="Int32" Nullable="false" />
+          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordQuestion" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordAnswer" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="IsLockedOut" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLoginDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastPasswordChangedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLockoutDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FailedPasswordAttemptCount" Type="Int32" Nullable="false" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="Int32" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptWindowsStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comment" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Application" Relationship="SAILORModel.FK_dbo_Memberships_dbo_Applications_ApplicationId" FromRole="Memberships" ToRole="Applications" />
+          <NavigationProperty Name="User" Relationship="SAILORModel.FK_dbo_Memberships_dbo_Users_UserId" FromRole="Memberships" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="SAILORTest">
+          <Key>
+            <PropertyRef Name="RandID" />
+          </Key>
+          <Property Name="RandID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="SiteID" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ScreeningID" Type="Int32" />
+          <Property Name="ParticipantInitials" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Gender" Type="Int32" />
+          <Property Name="SITE" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="RandomisedBy" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Incl" Type="Int32" />
+          <Property Name="Excl" Type="Int32" />
+          <Property Name="ApproveMedical" Type="Int32" />
+          <Property Name="ConsentDate" Type="DateTime" Precision="0" />
+          <Property Name="RandDate" Type="DateTime" Precision="3" />
+          <Property Name="RandTime" Type="DateTime" Precision="3" />
+          <Property Name="RandAllocation" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="RandMethod" Type="Int32" />
+          <Property Name="RandError" Type="Int32" />
+          <Property Name="RandErrorDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="LastActivityDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Application" Relationship="SAILORModel.FK_dbo_Users_dbo_Applications_ApplicationId" FromRole="Users" ToRole="Applications" />
+          <NavigationProperty Name="Membership" Relationship="SAILORModel.FK_dbo_Memberships_dbo_Users_UserId" FromRole="Users" ToRole="Memberships" />
+        </EntityType>
+        <Association Name="FK_dbo_Memberships_dbo_Applications_ApplicationId">
+          <End Role="Applications" Type="SAILORModel.Application" Multiplicity="1" />
+          <End Role="Memberships" Type="SAILORModel.Membership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Users_dbo_Applications_ApplicationId">
+          <End Role="Applications" Type="SAILORModel.Application" Multiplicity="1" />
+          <End Role="Users" Type="SAILORModel.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Memberships_dbo_Users_UserId">
+          <End Role="Users" Type="SAILORModel.User" Multiplicity="1" />
+          <End Role="Memberships" Type="SAILORModel.Membership" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SAILORModelStoreContainer" CdmEntityContainer="SAILOREntities">
+          <EntitySetMapping Name="Applications">
+            <EntityTypeMapping TypeName="SAILORModel.Application">
+              <MappingFragment StoreEntitySet="Applications">
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Memberships">
+            <EntityTypeMapping TypeName="SAILORModel.Membership">
+              <MappingFragment StoreEntitySet="Memberships">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+                <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+                <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+                <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+                <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptWindowsStart" ColumnName="FailedPasswordAnswerAttemptWindowsStart" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SAILORTests">
+            <EntityTypeMapping TypeName="SAILORModel.SAILORTest">
+              <MappingFragment StoreEntitySet="SAILORTest">
+                <ScalarProperty Name="RandID" ColumnName="RandID" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="ScreeningID" ColumnName="ScreeningID" />
+                <ScalarProperty Name="ParticipantInitials" ColumnName="ParticipantInitials" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="SITE" ColumnName="SITE" />
+                <ScalarProperty Name="RandomisedBy" ColumnName="RandomisedBy" />
+                <ScalarProperty Name="Incl" ColumnName="Incl" />
+                <ScalarProperty Name="Excl" ColumnName="Excl" />
+                <ScalarProperty Name="ApproveMedical" ColumnName="ApproveMedical" />
+                <ScalarProperty Name="ConsentDate" ColumnName="ConsentDate" />
+                <ScalarProperty Name="RandDate" ColumnName="RandDate" />
+                <ScalarProperty Name="RandTime" ColumnName="RandTime" />
+                <ScalarProperty Name="RandAllocation" ColumnName="RandAllocation" />
+                <ScalarProperty Name="RandMethod" ColumnName="RandMethod" />
+                <ScalarProperty Name="RandError" ColumnName="RandError" />
+                <ScalarProperty Name="RandErrorDate" ColumnName="RandErrorDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SAILORModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+                <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,216 @@
+﻿@using System.Activities.Statements
+@using System.ComponentModel.DataAnnotations
+@model SAILORRandomisation.Models.SAILOR
+@{
+    ViewBag.Title = "SAILOR Randomisation" + 
+                    "Add New Participant";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<img src="~/Content/images/SAILORLogo.png" alt="logo" />
+<h2>Randomise Consented SAILOR Study Participant</h2>
+@using (Html.BeginForm()) {
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+     
+                
+
+
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ScreeningID,"Screening ID :" )
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ScreeningID, new { @placeholder = "5"})
+            @Html.ValidationMessageFor(model => model.ScreeningID)
+        </div>
+        
+        
+        
+       
+             <div class="editor-label">
+            @Html.LabelFor(model => model.SITE)
+        </div>
+
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.SITE, 
+            new SelectList(new string[] { "Swansea", "Cornwall", "Glan Clwyd", "Wrexham Maelor", "Bangor", "Newcastle", "St Marks, London","Salisbury", "Plymouth"}, Model.SITE))
+            @Html.ValidationMessageFor(model => model.SITE)
+        </div>
+        
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ParticipantInitials, "Participant Initials")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ParticipantInitials)
+            @Html.ValidationMessageFor(model => model.ParticipantInitials)
+        </div>
+        
+           <div class="editor-label">
+            @Html.LabelFor(model => model.Age, "Age(participant must be over 18)")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Age)
+            @Html.ValidationMessageFor(model => model.Age)
+        </div>
+ 
+    
+            <div class="editor-label">
+            @Html.LabelFor(model => model.Gender, "Please document sex of the participant")
+        </div>
+        
+        @Html.DropDownListFor(model => model.Gender, new SelectList(
+            new List<Object>{
+                new { value = 1 , text = "Male" },
+                new { value = 2 , text = "Female"}
+                
+           
+            },
+            "value",
+            "text",
+            1))
+        
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Incl, "Does the participant meet all inclusion criteria?")
+        </div>
+        @Html.DropDownListFor(model => model.Incl, new SelectList(
+            new List<Object>{
+                 
+               new { value = 1 , text = "Yes" },
+                new { value = 2 , text = "No"}
+                  
+                      
+            },
+            "value",
+            "text",
+            2))
+        @Html.ValidationMessageFor(model => model.Incl)
+             
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Excl, "Does the participant meet any exclusion criteria?")
+        </div>
+        @Html.DropDownListFor(model => model.Excl, new SelectList(
+            new List<Object>{
+                 new { value = 1 , text = "Yes" },
+                new { value = 2 , text = "No"}             
+               
+            },
+            "value",
+            "text",
+            1))
+        @Html.ValidationMessageFor(model => model.Excl)
+                
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ApproveMedical, "In the opinion of the designated medical practitioner, is the patient eligible for the trial?")
+        </div>
+        @Html.DropDownListFor(model => model.ApproveMedical, new SelectList(
+            new List<Object>{
+                 new { value = 1 , text = "Yes" },
+                new { value = 2 , text = "No"}             
+               
+            },
+            "value",
+            "text",
+            2))
+        @Html.ValidationMessageFor(model => model.ApproveMedical)
+                           
+        
+            <div class="editor-label">
+            @Html.LabelFor(model => model.ConsentDate, "Add in format yyyy-mm-dd Consent Date:")
+        </div>       
+        
+        <div class="editor-field">
+             @Html.TextBoxFor(model => model.ConsentDate, new {@placeholder = "yyyy-mm-dd"})
+           @*  @string.Format("{0:ddd}",Convert.ToDateTime(Html.DisplayFor(model => model.ConsentDate).ToString()))*@
+             @*, new { @placeholder = "DD/MM/YYYY"}) *@
+             @* @Html.EditorFor(model => model.ConsentDate)
+             "{0:dd/MM/yyyy}"
+            @Html.ValidationMessageFor(model => model.ConsentDate) </div>*@
+             @*,"{0:dd/MM/yyyy}"*@
+        </div>
+        
+        
+           
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RandomisedBy, "Randomised By:")
+        </div>
+        @Html.DropDownListFor(model => model.RandomisedBy, 
+        new SelectList(new string[] {  @User.Identity.Name }, Model.RandomisedBy))
+      
+        
+
+
+         
+
+         
+         
+              
+     @if (@User.Identity.Name == "thornek")
+
+      { 
+           <div class="editor-label" >
+            @Html.LabelFor(model => model.RandMethod, "Randomisation Method")
+        </div>
+
+
+        @Html.DropDownListFor(model => model.RandMethod,  new SelectList(
+            new List<Object>{
+                new { value = 1 , text = "Web-based"},
+                new { value = 2 , text = "Phone-based"}, 
+                new { value = 3 , text = "Manual"}                          
+               
+            },
+            "value",
+            "text",
+            1))
+        @Html.ValidationMessageFor(model => model.RandMethod)
+
+      }
+
+
+      
+        
+        
+          
+            @*
+            add eror =1 
+            and rand error date 
+            *@
+                    
+
+
+
+                      
+      
+        @Html.HiddenFor(model => model.ScreeningID)
+       
+   
+        @Html.HiddenFor(model => model.RandID)
+        @Html.HiddenFor(model => model.SiteID)
+        @Html.HiddenFor(model => model.ConsentDate)
+
+        @Html.HiddenFor(model => model.RandAllocation)
+        @Html.HiddenFor(model => model.ApproveMedical)
+        @Html.HiddenFor(model => model.RandomisedBy)
+    
+         @Html.HiddenFor(model => model.RandMethod, new { @Value = 1 })
+        <p>
+            <input type="submit" value="Randomise" />
+        </p>
+    </fieldset>
+    }
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SAILORModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="SAILORModelStoreContainer">
+    <EntitySet Name="Applications" EntityType="SAILORModel.Store.Applications" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Memberships" EntityType="SAILORModel.Store.Memberships" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SAILORTest" EntityType="SAILORModel.Store.SAILORTest" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="SAILORModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_dbo_Memberships_dbo_Applications_ApplicationId" Association="SAILORModel.Store.FK_dbo_Memberships_dbo_Applications_ApplicationId">
+      <End Role="Applications" EntitySet="Applications" />
+      <End Role="Memberships" EntitySet="Memberships" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Memberships_dbo_Users_UserId" Association="SAILORModel.Store.FK_dbo_Memberships_dbo_Users_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Memberships" EntitySet="Memberships" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Users_dbo_Applications_ApplicationId" Association="SAILORModel.Store.FK_dbo_Users_dbo_Applications_ApplicationId">
+      <End Role="Applications" EntitySet="Applications" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Applications">
+    <Key>
+      <PropertyRef Name="ApplicationId" />
+    </Key>
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ApplicationName" Type="nvarchar" Nullable="false" MaxLength="235" />
+    <Property Name="Description" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="Memberships">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="PasswordFormat" Type="int" Nullable="false" />
+    <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="PasswordQuestion" Type="nvarchar" MaxLength="256" />
+    <Property Name="PasswordAnswer" Type="nvarchar" MaxLength="128" />
+    <Property Name="IsApproved" Type="bit" Nullable="false" />
+    <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+    <Property Name="LastPasswordChangedDate" Type="datetime" Nullable="false" />
+    <Property Name="LastLockoutDate" Type="datetime" Nullable="false" />
+    <Property Name="FailedPasswordAttemptCount" Type="int" Nullable="false" />
+    <Property Name="FailedPasswordAttemptWindowStart" Type="datetime" Nullable="false" />
+    <Property Name="FailedPasswordAnswerAttemptCount" Type="int" Nullable="false" />
+    <Property Name="FailedPasswordAnswerAttemptWindowsStart" Type="datetime" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="SAILORTest">
+    <Key>
+      <PropertyRef Name="RandID" />
+    </Key>
+    <Property Name="RandID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SiteID" Type="nvarchar(max)" />
+    <Property Name="ScreeningID" Type="int" />
+    <Property Name="ParticipantInitials" Type="nvarchar(max)" />
+    <Property Name="Age" Type="int" />
+    <Property Name="Gender" Type="int" />
+    <Property Name="SITE" Type="nvarchar(max)" />
+    <Property Name="RandomisedBy" Type="nvarchar(max)" />
+    <Property Name="Incl" Type="int" />
+    <Property Name="Excl" Type="int" />
+    <Property Name="ApproveMedical" Type="int" />
+    <Property Name="ConsentDate" Type="date" />
+    <Property Name="RandDate" Type="datetime" />
+    <Property Name="RandTime" Type="datetime" />
+    <Property Name="RandAllocation" Type="nvarchar(max)" />
+    <Property Name="RandMethod" Type="int" />
+    <Property Name="RandError" Type="int" />
+    <Property Name="RandErrorDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+    <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_dbo_Memberships_dbo_Applications_ApplicationId">
+    <End Role="Applications" Type="SAILORModel.Store.Applications" Multiplicity="1" />
+    <End Role="Memberships" Type="SAILORModel.Store.Memberships" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="Memberships">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Memberships_dbo_Users_UserId">
+    <End Role="Users" Type="SAILORModel.Store.Users" Multiplicity="1" />
+    <End Role="Memberships" Type="SAILORModel.Store.Memberships" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Memberships">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Users_dbo_Applications_ApplicationId">
+    <End Role="Applications" Type="SAILORModel.Store.Applications" Multiplicity="1" />
+    <End Role="Users" Type="SAILORModel.Store.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

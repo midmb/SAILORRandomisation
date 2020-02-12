@@ -1,0 +1,174 @@
+﻿@model SAILORRandomisation.Models.SAILOR
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>SAILOR</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RandID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RandID)
+            @Html.ValidationMessageFor(model => model.RandID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SiteID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SiteID)
+            @Html.ValidationMessageFor(model => model.SiteID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ScreeningID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ScreeningID)
+            @Html.ValidationMessageFor(model => model.ScreeningID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ParticipantInitials)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ParticipantInitials)
+            @Html.ValidationMessageFor(model => model.ParticipantInitials)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Age)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Age)
+            @Html.ValidationMessageFor(model => model.Age)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Gender)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Gender)
+            @Html.ValidationMessageFor(model => model.Gender)
+        </div>
+
+       
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SITE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SITE)
+            @Html.ValidationMessageFor(model => model.SITE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RandomisedBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RandomisedBy)
+            @Html.ValidationMessageFor(model => model.RandomisedBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Incl)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Incl)
+            @Html.ValidationMessageFor(model => model.Incl)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Excl)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Excl)
+            @Html.ValidationMessageFor(model => model.Excl)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ApproveMedical)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ApproveMedical)
+            @Html.ValidationMessageFor(model => model.ApproveMedical)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ConsentDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ConsentDate)
+            @Html.ValidationMessageFor(model => model.ConsentDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RandDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RandDate)
+            @Html.ValidationMessageFor(model => model.RandDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RandTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RandTime)
+            @Html.ValidationMessageFor(model => model.RandTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RandAllocation)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RandAllocation)
+            @Html.ValidationMessageFor(model => model.RandAllocation)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RandMethod)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RandMethod)
+            @Html.ValidationMessageFor(model => model.RandMethod)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RandError)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RandError)
+            @Html.ValidationMessageFor(model => model.RandError)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RandErrorDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RandErrorDate)
+            @Html.ValidationMessageFor(model => model.RandErrorDate)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

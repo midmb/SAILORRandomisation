@@ -1,0 +1,209 @@
+﻿@model IEnumerable<TestSAILORRandomisation.Models.SAILORTest>
+
+
+@{
+    ViewBag.Title ="TEST SAILOR Web Randomisation";
+}
+<img src="~/Content/images/SAILORLogo.png" alt="logo" />
+<h2>SAILOR Trial Participant Web Randomisation</h2>
+<table>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.HiddenFor(modelItem => item.RandID)
+        </td>
+     
+        
+  @*    @if(@User.Identity.Name == "charlotted")*@
+     
+    @*    
+{}*@
+
+      <td>
+            @Html.ActionLink("Begin randomisation process ", "AddNewPAtient", new {id = item.RandID}, new {type = "button"})
+          @*
+            @Html.ActionLink("Exception Randomisation (Envelope or Manual)", "ExceptionRandomisation", new {id = item.ID}, new {type = "button"})
+            @Html.ActionLink("Randomised in Error", "DetailsError", new {id = item.ID}, new {type = "button"})
+              @Html.ActionLink("Withdrawal", "Withdrawal", new {id = item.ID}, new {type = "button"})*@
+        </td>
+
+@*
+else
+{
+      <td>
+            @Html.ActionLink("Add New Participant", "AddNewPAtient", new {id = item.ID}, new {type = "button"})
+            @Html.ActionLink("Randomise", "Details", new {id = item.ID}, new {type = "button"})
+            @Html.ActionLink("Exception Randomisation (Envelope or Manual)", "ExceptionRandomisation", new {id = item.ID}, new {type = "button"})
+            @Html.ActionLink("Randomised in Error", "DetailsError", new {id = item.ID}, new {type = "button"})
+            @*  @Html.ActionLink("Withdrawal", "Withdrawal", new {id = item.ID}, new {type = "button"})
+        </td>
+}
+        *@
+
+
+       
+        
+        
+
+    </tr>
+}
+</table>
+
+@*
+</br>
+<iframe width="900" height="900" frameborder="0" allowfullscreen src="http://mapsdata.co.uk/mapsdataapp/index.php/site/htmlembed/bac6ff6ccc000ad4dc878112a6ed1811?marker=mapsdata_m4&zoom=12&center=51.783165,-4.242590&display=clustermap&md5=bac6ff6ccc000ad4dc878112a6ed1811&viewcolumn=&viewcolor=CC0000&maptype=worldbrightnew&"></iframe>*@
+@*@using (Html.BeginForm("ExportData", "Model", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table>
+        <tr><td></td><td><input type="submit" name="Export" id="Export" value="Export" /></td></tr>
+    </table>
+}*@
+
+
+
+
+
+
+
+
+
+
+
+@*
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RandID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SiteID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScreeningID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ParticipantInitials)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StudyEnrolDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SITE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RandomisedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Incl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Excl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApproveMedical)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConsentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RandDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RandTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RandAllocation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RandMethod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RandError)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RandErrorDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RandID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SiteID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScreeningID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipantInitials)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudyEnrolDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SITE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RandomisedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Incl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Excl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApproveMedical)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConsentDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RandDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RandTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RandAllocation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RandMethod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RandError)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RandErrorDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
+*@
